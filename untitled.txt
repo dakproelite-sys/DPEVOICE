@@ -1,0 +1,176 @@
+// modules/bibliotheque.js
+
+/**
+ * Module Bibliothèque - DPE VOICE (Édition Puissante, Élégante & Comique)
+ * Gère la base de connaissances, les templates professionnels et une touche d'humour tech.
+ */
+
+export function render(container) {
+    // 1. Injection dynamique des styles propres au module alignés sur le thème sombre
+    if (!document.getElementById("bibliotheque-module-style")) {
+        const style = document.createElement("style");
+        style.id = "bibliotheque-module-style";
+        style.textContent = `
+            .dpe-bibliotheque-wrapper {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 20px;
+                animation: fadeInBiblio 0.3s ease-in-out;
+            }
+            @keyframes fadeInBiblio {
+                from { opacity: 0; transform: translateY(6px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .biblio-header {
+                margin-bottom: 20px;
+                border-bottom: 1px solid var(--border);
+                padding-bottom: 15px;
+            }
+            .biblio-header h2 {
+                color: var(--gold);
+                font-size: 20px;
+                margin: 0 0 4px 0;
+            }
+            .biblio-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 15px;
+            }
+            .biblio-card {
+                padding: 18px;
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                background: var(--card-bg);
+                box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+                transition: all 0.2s;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            .biblio-card:hover {
+                border-color: var(--blue-glow);
+                transform: translateY(-2px);
+                background: var(--card-hover);
+            }
+            .biblio-card-icon {
+                font-size: 26px;
+                margin-bottom: 10px;
+            }
+            .biblio-card-title {
+                font-size: 14px;
+                font-weight: bold;
+                color: var(--text-primary);
+                margin-bottom: 6px;
+            }
+            .biblio-card-desc {
+                font-size: 12px;
+                color: var(--text-secondary);
+                margin-bottom: 14px;
+                line-height: 1.6;
+            }
+            .biblio-btn {
+                background: var(--sidebar-bg);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                padding: 8px 12px;
+                font-size: 11px;
+                font-weight: bold;
+                color: var(--text-primary);
+                cursor: pointer;
+                transition: background 0.2s;
+                align-self: flex-start;
+            }
+            .biblio-btn:hover {
+                background: var(--card-hover);
+                border-color: var(--blue-glow);
+                color: var(--blue-glow);
+            }
+            .joke-box {
+                margin-top: 25px;
+                padding: 16px;
+                border: 1px dashed var(--gold);
+                border-radius: 12px;
+                background: rgba(224, 169, 109, 0.05);
+                font-size: 13px;
+                color: var(--gold);
+                line-height: 1.6;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // 2. Structure HTML du module Bibliothèque
+    container.innerHTML = `
+        <div class="dpe-bibliotheque-wrapper">
+            <div class="biblio-header">
+                <h2>▦ Bibliothèque de Ressources & Sagesse Tech</h2>
+                <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">
+                    Guides, templates prêts à l'emploi et bonne humeur pour entrepreneurs connectés.
+                </p>
+            </div>
+
+            <div class="biblio-grid">
+                <!-- Ressource 1 -->
+                <div class="biblio-card">
+                    <div>
+                        <div class="biblio-card-icon">📄</div>
+                        <div class="biblio-card-title">Modèles de Facturation</div>
+                        <div class="biblio-card-desc">Templates standardisés pour vos ventes en ligne, dropshipping et prestations de services au Bénin.</div>
+                    </div>
+                    <button class="biblio-btn" data-action="facture">Voir le modèle</button>
+                </div>
+
+                <!-- Ressource 2 -->
+                <div class="biblio-card">
+                    <div>
+                        <div class="biblio-card-icon">🚀</div>
+                        <div class="biblio-card-title">Guide de Déploiement Cloud</div>
+                        <div class="biblio-card-desc">Astuces pour synchroniser Vercel, GitHub, Cloudflare R2 et Firebase sans s'arracher les cheveux.</div>
+                    </div>
+                    <button class="biblio-btn" data-action="cloud">Lire le guide</button>
+                </div>
+
+                <!-- Ressource 3 -->
+                <div class="biblio-card">
+                    <div>
+                        <div class="biblio-card-icon">💡</div>
+                        <div class="biblio-card-title">Psychologie du Client Exigeant</div>
+                        <div class="biblio-card-desc">Comment garder son calme quand un client demande si la voiture livrée vient avec le chauffeur inclus.</div>
+                    </div>
+                    <button class="biblio-btn" data-action="client">Découvrir l'astuce</button>
+                </div>
+            </div>
+
+            <div class="joke-box" id="jokeBox">
+                🎭 **Le coin sourire du développeur :** <span id="jokeText">Pourquoi les développeurs préfèrent-ils le mode sombre ? Parce que la lumière attire les bugs !</span>
+            </div>
+        </div>
+    `;
+
+    // 3. Interactions dynamiques
+    container.querySelectorAll(".biblio-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const action = btn.dataset.action;
+            if (action === "facture") {
+                alert("Modèle de facture DAKPRO ELITE :\n- En-tête : Vos coordonnées\n- Ligne 1 : Article / Produit\n- Paiement : FedaPay / Mobile Money\nPrêt à l'emploi !");
+            } else if (action === "cloud") {
+                alert("Règle d'or du déploiement : Si ça marche sur ton téléphone Tecno en local, pousse sur Git et laisse Vercel faire la magie !");
+            } else if (action === "client") {
+                alert("Conseil Zen : Répondez toujours avec le sourire... ou envoyez-lui le lien de suivi de commande automatique !");
+            }
+        });
+    });
+
+    // Rotation comique des citations / blagues tech au clic sur la boîte
+    const jokes = [
+        "Pourquoi les développeurs préfèrent-ils le mode sombre ? Parce que la lumière attire les bugs !",
+        "Un bon codeur est un codeur qui a tellement automatisé son site qu'il peut aller dormir pendant que FedaPay encaisse l'argent.",
+        "Il n'y a pas de problème informatique qu'un bon redémarrage et un bol de gari ne puissent résoudre !",
+        "Le saviez-vous ? Votre assistant DPE VOICE ne prend jamais de pause café, contrairement à vous. Allez en boire une !"
+    ];
+
+    document.getElementById("jokeBox").addEventListener("click", () => {
+        const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+        document.getElementById("jokeText").textContent = randomJoke;
+    });
+}
